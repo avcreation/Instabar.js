@@ -11,6 +11,7 @@ function Instabar(options) {
     "access_token": "",
     "selector": "instabar",
     'quality': "thumbnail",
+    'caption': true,
     'user_id': "",
   };
 
@@ -55,11 +56,28 @@ Instabar.prototype = {
 
         // Create the img HTML element
         var image_img = document.createElement("img");
-        image_img.src = data[i].images[this.parameters.quality].url;;
+        image_img.src = data[i].images[this.parameters.quality].url;
         image_img.className = "insta-pict";
+
+        // Add alt text and if there is a title, create caption
+        if(data[i].caption !== null){
+          image_img.alt = data[i].caption.text;
+
+          if(this.parameters.caption){
+            var caption = document.createElement("div");
+            caption.className = "insta-caption";
+            caption.innerHTML = data[i].caption.text.substr(0, 30) + "...";
+            // Add the caption inside the "a" HTML element
+            image_a.appendChild(caption);
+          }
+        }else{
+          image_img.alt = data[i].id;
+        }
 
         // Wrap the image with the link
         image_a.appendChild(image_img);
+        image_a.style.position = "relative";
+        image_a.className = "insta-link";
 
         // Fill the 'Instabar' with the link
         insta_bar.appendChild(image_a);
@@ -100,10 +118,11 @@ Instabar.prototype = {
     window[instance] = new Instabar(this.parameters);
     window[instance].instance_id = this.instance_id;
     // Create the url
-    var url = "https://api.instagram.com/v1/users/self/feed/?access_token=" + this.parameters.access_token + "&callback="+instance+".display";
+    var url = "https://api.instagram.com/v1/users/self/feed/?user_id="+ this.parameters.user_id +"&access_token=" + this.parameters.access_token + "&callback="+instance+".display";
 
     // Create a script element to avoid Cross-Domain ajax request
     script = document.createElement('script');
+    script.id = 'instafeed-fetcher';
     script.src = url;
     // Append the script to the end of the body element
     body = document.getElementsByTagName('body');
