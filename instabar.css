@@ -6,34 +6,64 @@
 ===================================*/
 
 .insta-link {
-  overflow: hidden; }
-  .insta-link .insta-pict {
-    margin: 0; }
-  .insta-link .insta-caption {
-    -webkit-transition-property: opacity;
-    -moz-transition-property: opacity;
-    -o-transition-property: opacity;
-    transition-property: opacity;
-    -webkit-transition-duration: 0.2s;
-    -moz-transition-duration: 0.2s;
-    -o-transition-duration: 0.2s;
-    transition-duration: 0.2s;
-    -webkit-transition-timing-function: ease-in;
-    -moz-transition-timing-function: ease-in;
-    -o-transition-timing-function: ease-in;
-    transition-timing-function: ease-in;
-    position: absolute;
-    display: block;
-    bottom: 5px;
-    font-size: 12px;
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
-    background: rgba(0, 0, 0, 0.6);
-    text-align: left;
-    color: white;
-    width: 100%;
-    padding: 8px 10px; }
+  overflow: hidden;
+  display: inline-block; }
+.insta-link .insta-pict {
+  margin: 0; }
+.insta-link .insta-caption {
+  -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-in;
+  -moz-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+  position: absolute;
+  display: block;
+  bottom: 5px;
+  font-size: 12px;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.7);
+  text-align: left;
+  color: black;
+  width: 100%;
+  padding: 8px 10px; }
+.insta-link .likes-count {
+  -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-in;
+  -moz-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  width: 100%;
+  padding-top: 25px;
+  position: absolute;
+  top: 0;
+  bottom: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white; }
+.insta-link .likes-count .symbol {
+  font-family: 'Mono Social Icons Font';
+  src: url("MonoSocialIconsFont-1.10.eot");
+  src: url("MonoSocialIconsFont-1.10.eot?#iefix") format("embedded-opentype"), url("MonoSocialIconsFont-1.10.woff") format("woff"), url("MonoSocialIconsFont-1.10.ttf") format("truetype"), url("MonoSocialIconsFont-1.10.svg#MonoSocialIconsFont") format("svg");
+  src: url("MonoSocialIconsFont-1.10.ttf") format("truetype");
+  font-size: 32px;
+  color: #ff556b; }
 
-.insta-link:hover .insta-caption {
+.insta-link:hover .insta-caption, .insta-link:hover .likes-count {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1; }

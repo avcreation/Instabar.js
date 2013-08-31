@@ -12,6 +12,7 @@ function Instabar(options) {
     "selector": "instabar",
     'quality': "thumbnail",
     'caption': true,
+    'likes': true,
     'user_id': "",
   };
 
@@ -58,6 +59,15 @@ Instabar.prototype = {
         var image_img = document.createElement("img");
         image_img.src = data[i].images[this.parameters.quality].url;
         image_img.className = "insta-pict";
+
+        // Add the likes count
+        if(this.parameters.likes) {
+          var likes_count = data[i].likes.count;
+          var likes = document.createElement("div");
+          likes.className = "likes-count";
+          likes.innerHTML = "<strong class='symbol'>&#xe044;</strong>" + likes_count;
+          image_a.appendChild(likes);
+        }
 
         // Add alt text and if there is a title, create caption
         if(data[i].caption !== null){
