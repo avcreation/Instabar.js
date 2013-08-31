@@ -2,7 +2,7 @@
 = InstaBar.js                       =
 = GPL2 licence                      =
 = Created by Alexandre Voiney       =
-= V.1 - juillet 2013                =
+= V.2 - août 2013                   =
 ===================================*/
 
 function Instabar(options) {
@@ -13,7 +13,8 @@ function Instabar(options) {
     'quality': "thumbnail",
     'caption': true,
     'likes': true,
-    'user_id': "",
+    'user_id': false,
+    'count': 30,
   };
 
   // Override defaults
@@ -128,7 +129,10 @@ Instabar.prototype = {
     window[instance] = new Instabar(this.parameters);
     window[instance].instance_id = this.instance_id;
     // Create the url
-    var url = "https://api.instagram.com/v1/users/self/feed/?user_id="+ this.parameters.user_id +"&access_token=" + this.parameters.access_token + "&callback="+instance+".display";
+    if(!this.parameters.user_id)
+      var url = "https://api.instagram.com/v1/users/self/feed/?count="+ this.parameters.count +"&access_token=" + this.parameters.access_token + "&callback="+instance+".display";
+    else
+      var url = "https://api.instagram.com/v1/users/"+ this.parameters.user_id +"/media/recent/?count="+ this.parameters.count +"&access_token=" + this.parameters.access_token + "&callback="+instance+".display";
 
     // Create a script element to avoid Cross-Domain ajax request
     script = document.createElement('script');
