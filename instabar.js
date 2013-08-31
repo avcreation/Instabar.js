@@ -2,7 +2,7 @@
 = InstaBar.js                       =
 = GPL2 licence                      =
 = Created by Alexandre Voiney       =
-= V.1 - juillet 2013                =
+= V.2 - août 2013                   =
 ===================================*/
 
 function Instabar(options) {
@@ -11,7 +11,10 @@ function Instabar(options) {
     "access_token": "",
     "selector": "instabar",
     'quality': "thumbnail",
-    'user_id': "",
+    'caption': true,
+    'likes': true,
+    'user_id': false,
+    'count': 30,
   };
 
   // Override defaults
@@ -55,11 +58,37 @@ Instabar.prototype = {
 
         // Create the img HTML element
         var image_img = document.createElement("img");
-        image_img.src = data[i].images[this.parameters.quality].url;;
+        image_img.src = data[i].images[this.parameters.quality].url;
         image_img.className = "insta-pict";
+
+        // Add the likes count
+        if(this.parameters.likes) {
+          var likes_count = data[i].likes.count;
+          var likes = document.createElement("div");
+          likes.className = "likes-count";
+          likes.innerHTML = "<strong class='symbol'>&#xe044;</strong>" + likes_count;
+          image_a.appendChild(likes);
+        }
+
+        // Add alt text and if there is a title, create caption
+        if(data[i].caption !== null){
+          image_img.alt = data[i].caption.text;
+
+          if(this.parameters.caption){
+            var caption = document.createElement("div");
+            caption.className = "insta-caption";
+            caption.innerHTML = data[i].caption.text.substr(0, 30) + "...";
+            // Add the caption inside the "a" HTML element
+            image_a.appendChild(caption);
+          }
+        }else{
+          image_img.alt = data[i].id;
+        }
 
         // Wrap the image with the link
         image_a.appendChild(image_img);
+        image_a.style.position = "relative";
+        image_a.className = "insta-link";
 
         // Fill the 'Instabar' with the link
         insta_bar.appendChild(image_a);
@@ -100,10 +129,14 @@ Instabar.prototype = {
     window[instance] = new Instabar(this.parameters);
     window[instance].instance_id = this.instance_id;
     // Create the url
-    var url = "https://api.instagram.com/v1/users/self/feed/?access_token=" + this.parameters.access_token + "&callback="+instance+".display";
+    if(!this.parameters.user_id)
+      var url = "https://api.instagram.com/v1/users/self/feed/?count="+ this.parameters.count +"&access_token=" + this.parameters.access_token + "&callback="+instance+".display";
+    else
+      var url = "https://api.instagram.com/v1/users/"+ this.parameters.user_id +"/media/recent/?count="+ this.parameters.count +"&access_token=" + this.parameters.access_token + "&callback="+instance+".display";
 
     // Create a script element to avoid Cross-Domain ajax request
     script = document.createElement('script');
+    script.id = 'instafeed-fetcher';
     script.src = url;
     // Append the script to the end of the body element
     body = document.getElementsByTagName('body');
