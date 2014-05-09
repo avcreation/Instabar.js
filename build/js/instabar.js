@@ -24,7 +24,7 @@
       text = "";
       choices = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
       for (i = _i = 0; _i <= 4; i = ++_i) {
-        text += choices.charAt(Math.floor(Math.random * choices.length));
+        text += choices.charAt(Math.floor(Math.random() * choices.length));
       }
       return text;
     };

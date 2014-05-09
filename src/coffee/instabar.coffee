@@ -26,7 +26,7 @@ class @Instabar
         choices = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
         for i in [0..4]
-            text += choices.charAt Math.floor Math.random * choices.length
+            text += choices.charAt Math.floor Math.random() * choices.length
     
         return text
 
