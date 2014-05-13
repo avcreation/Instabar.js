@@ -1,0 +1,88 @@
+<!doctype>
+<html>
+<head>
+    <title>Instabar Example</title>
+    <link rel="stylesheet" href="css/instabar.css" />
+    <link rel="stylesheet" href="css/example.css" />
+</head>
+<body>
+    <header>
+        <h1>Instabar.js</h1>
+    </header>
+
+    <section>
+        <div id="instabar-1"></div>
+
+        <footer>
+            <p>Filter on the <strong>SnowBoard</strong> tag</p>
+        </footer>
+
+    </section>
+
+    <section>
+        <div id="instabar-2"></div>
+
+        <footer>
+            <p>Filter on the <strong>ROXY's user id</strong> tag</p>
+        </footer>
+
+    </section>
+
+
+    <script src='js/instabar.js' type="text/javascript"></script>
+    <script type="text/javascript">
+        var num_picts = 20;
+        var myInstaBar_1 = new Instabar({
+            'access_token': "406676446.7b0b57a.a02f4471e05e4212a30097e6484bda64",
+            'selector': 'instabar-1', // default is 'insta-bar',
+            'quality': 'thumbnail', // 'thumbnail'(default) ,'low_resolution', 'standard_resolution'
+            'caption': true,
+            'likes': true,
+            'user_id': false,
+            'count': num_picts,
+            'popular': false,
+            'location': false,
+            'tag': 'snowboard'
+        });
+        myInstaBar_1.run();
+
+        var myInstaBar_2 = new Instabar({
+            'access_token': "406676446.7b0b57a.a02f4471e05e4212a30097e6484bda64",
+            'selector': 'instabar-2', // default is 'insta-bar',
+            'quality': 'thumbnail', // 'thumbnail'(default) ,'low_resolution', 'standard_resolution'
+            'caption': true,
+            'likes': true,
+            'user_id': '13228105',
+            'count': num_picts/2,
+            'popular': false,
+            'location': false,
+            'tag': false
+        });
+        myInstaBar_2.run();
+
+
+        var myWidth;
+
+        if( typeof( window.innerWidth ) == 'number' ) { 
+            //Non-IE 
+            myWidth = window.innerWidth;
+
+        } else if( document.documentElement && 
+            ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) { 
+
+            //IE 6+ in 'standards compliant mode' 
+
+            myWidth = document.documentElement.clientWidth; 
+
+        } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) { 
+            //IE 4 compatible 
+            myWidth = document.body.clientWidth; 
+        }
+
+        css = document.createElement("style");
+        css.innerHTML = '.insta-link img { max-width : ' + 2*myWidth/num_picts + 'px; }';
+        document.getElementsByTagName('head')[0].appendChild(css);
+
+    </script>
+</body>
+</html>
