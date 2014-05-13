@@ -1,7 +1,7 @@
 # InstaBar.js                       
 # GPL2 licence                      
 # Created by Alexandre Voiney       
-# V.2 - août 2013                   
+# V.3 - mai 2014                   
 
 class @Instabar
     constructor: (options) ->

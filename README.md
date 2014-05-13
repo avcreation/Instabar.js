@@ -1,4 +1,4 @@
-InstaBar.js v2
+InstaBar.js v3
 ==============
 
 Instagram user feed javascript plugin
@@ -22,6 +22,9 @@ Once you've done that, you simpe have to insert the Instabar.min.js file and a p
             'caption': true/false,  // default is true
             'user_id': 'YOUR_USER_ID or false', // default is false
             'count': 'MAX_NUMBER_OF_PICTURE', // default is 30
+            'popular': true/false, //default is false
+            'location': 'AN_INSTAGRAM_LOCATION_ID or false', // default is false
+            'tag': 'AN_INSTAGRAM_TAG or false' // default is false
         });
         myInstaBar.run()
     </script>
@@ -29,6 +32,11 @@ Once you've done that, you simpe have to insert the Instabar.min.js file and a p
 ##It works !
 Now, your feed will be display in the div you've set earlier. Each image will be wrapped by a link to the instagram page.
 To style the feed, you can add some css rules to the class `insta-pict`.
+
+##Release Note : v3
+Switch to coffeescript and scss to write sources
+Add popular, location and tag filter
+Add an example page which load two distinct Instabar instance
 
 ##Release Note : v2
 Get only the user's photos.
