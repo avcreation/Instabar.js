@@ -13,6 +13,9 @@ class @Instabar
             'likes': true,
             'user_id': false,
             'count': 30,
+            'popular': false,
+            'location': false,
+            'tag': false
         }
 
         for name, value of options
@@ -112,11 +115,19 @@ class @Instabar
         window[instance] = new Instabar @parameters
         window[instance].instance_id = @instance_id
         # create the api url
-        unless @parameters.user_id
-            url = "https://api.instagram.com/v1/users/self/feed/?count=#{@parameters.count}&access_token=#{@parameters.access_token}&callback=#{instance}.display"
-        else
+        url_head = "https://api.instagram.com/v1/"
+        url_tail = "?count=#{@parameters.count}&access_token=#{@parameters.access_token}&callback=#{instance}.display"
 
-            url = "https://api.instagram.com/v1/users/#{@parameters.user_id}/media/recent/?count=#{@parameters.count}&access_token=#{@parameters.access_token}&callback=#{instance}.display"
+        if @parameters.tag
+            url = "#{url_head}tags/#{@parameters.tag}/media/recent#{url_tail}"
+        else if @parameters.location
+            url = "#{url_head}locations/#{@parameters.location}/media/recent#{url_tail}"
+        else if @parameters.popular
+            url = "#{url_head}media/popular/#{url_tail}"
+        else if @parameters.user_id
+            url = "#{url_head}users/#{@parameters.user_id}/media/recent/#{url_tail}"
+        else
+            url = "#{url_head}users/self/feed/#{url_tail}"
 
         # create a script HTML element to avoid Cross-Domain ajax request error
         script = document.createElement "script"

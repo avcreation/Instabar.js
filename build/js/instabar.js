@@ -10,7 +10,10 @@
         'caption': true,
         'likes': true,
         'user_id': false,
-        'count': 30
+        'count': 30,
+        'popular': false,
+        'location': false,
+        'tag': false
       };
       for (name in options) {
         value = options[name];
@@ -85,14 +88,22 @@
     };
 
     Instabar.prototype.run = function() {
-      var instance, script, url;
+      var instance, script, url, url_head, url_tail;
       instance = "instabar_" + this.instance_id;
       window[instance] = new Instabar(this.parameters);
       window[instance].instance_id = this.instance_id;
-      if (!this.parameters.user_id) {
-        url = "https://api.instagram.com/v1/users/self/feed/?count=" + this.parameters.count + "&access_token=" + this.parameters.access_token + "&callback=" + instance + ".display";
+      url_head = "https://api.instagram.com/v1/";
+      url_tail = "?count=" + this.parameters.count + "&access_token=" + this.parameters.access_token + "&callback=" + instance + ".display";
+      if (this.parameters.tag) {
+        url = "" + url_head + "tags/" + this.parameters.tag + "/media/recent" + url_tail;
+      } else if (this.parameters.location) {
+        url = "" + url_head + "locations/" + this.parameters.location + "/media/recent" + url_tail;
+      } else if (this.parameters.popular) {
+        url = "" + url_head + "media/popular/" + url_tail;
+      } else if (this.parameters.user_id) {
+        url = "" + url_head + "users/" + this.parameters.user_id + "/media/recent/" + url_tail;
       } else {
-        url = "https://api.instagram.com/v1/users/" + this.parameters.user_id + "/media/recent/?count=" + this.parameters.count + "&access_token=" + this.parameters.access_token + "&callback=" + instance + ".display";
+        url = "" + url_head + "users/self/feed/" + url_tail;
       }
       script = document.createElement("script");
       script.id = "instfeed-fetcher";
