@@ -36,13 +36,14 @@
   display: block;
   bottom: 0px;
   font-size: 12px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.7);
   text-align: left;
-  color: black;
+  color: #f7f7f7;
+  font-weight: bolder;
   width: 100%;
   padding: 8px 10px;
 }
-/* line 57, ../../src/scss/instabar.scss */
+/* line 58, ../../src/scss/instabar.scss */
 .insta-link .likes-count {
   -webkit-transition: opacity ease-in;
   -webkit-transition-delay: 0.2s;
@@ -59,7 +60,7 @@
   background: rgba(0, 0, 0, 0.7);
   color: white;
 }
-/* line 68, ../../src/scss/instabar.scss */
+/* line 69, ../../src/scss/instabar.scss */
 .insta-link .likes-count .symbol {
   font-family: 'Mono Social Icons Font';
   -webkit-text-rendering: optimizeLegibility;
@@ -75,13 +76,13 @@
   font-size: 32px;
   color: #ff556b;
 }
-/* line 75, ../../src/scss/instabar.scss */
+/* line 76, ../../src/scss/instabar.scss */
 .insta-link .likes-count .symbol:before {
   content: attr(title);
   margin-right: 0.3em;
   font-size: 130%;
 }
-/* line 84, ../../src/scss/instabar.scss */
+/* line 85, ../../src/scss/instabar.scss */
 .insta-link:hover .insta-caption, .insta-link:hover .likes-count {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
